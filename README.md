@@ -9,27 +9,47 @@ core.eve.js is all the fundemental API an event emitter needs and equally fast.
 ## How to get it.
 It is so simple and tiny the easiest way would be to just copy and paste the source and eventually modify it to your need.
 
+Another possibility is to use jsDelivr: https://cdn.jsdelivr.net/gh/SilvanCodes/eve/core.eve.min.js
+
+For the patches:
+- https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/on.patch.eve.min.js
+- https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/ons.patch.eve.min.js
+- https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/once.patch.eve.min.js
+
+Having the following setup pulls in core and applies the patches:
+
+```html
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/gh/SilvanCodes/eve/core.eve.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/on.patch.eve.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/ons.patch.eve.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/once.patch.eve.min.js"></script>
+    </head>
+</html>
+```
+
 ## How to use it.
 
 Create an event emitter.
 
-```
+```js
 const eve = new Eve();
 ```
 
 Setup and register event handlers.
 
-```
+```js
 const logData = data => console.log('Got some data:', data);
 const logAdded = (a, b) => console.log(a + b);
 
 eve.on('my-event-name', logData);
 eve.on('add-and-log', logAdded);
-````
+```
 
 Then go and fire your events.
 
-```
+```js
 eve.emit('my-event-name', 'test'); // output: Got some data: test
 
 // multiple arguments are possible after event name
@@ -38,7 +58,7 @@ eve.emit('add-and-log', 5, 6); // output: 11
 
 Finally when you are done unregister the handlers.
 
-```
+```js
 // unregister a single handler
 eve.off('my-event-name', logData);
 
@@ -59,7 +79,7 @@ Apply the patches as you see fit.
 
 This patch allows for the following syntax:
 
-```
+```js
 const handler1 = data => console.log(data);
 const handler2 = data => console.log(data);
 const handler3 = data => console.log(data);
@@ -72,7 +92,7 @@ eve.on('my-event-name', handler1, handler2, handler3);
 
 This patch allows for the following syntax:
 
-```
+```js
 const handler1 = data => console.log(data);
 const handler2 = data => console.log(data);
 const handler3 = data => console.log(data);
@@ -90,7 +110,7 @@ eve.ons({
 
 This patch allows for the following syntax:
 
-```
+```js
 const handler1 = data => console.log(data);
 
 // this handler will only fire once and then unregister itself
