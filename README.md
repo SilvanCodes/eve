@@ -15,6 +15,7 @@ For the patches:
 - https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/on.patch.eve.min.js
 - https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/ons.patch.eve.min.js
 - https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/once.patch.eve.min.js
+- https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/last.patch.eve.min.js
 
 Having the following setup pulls in core and applies the patches:
 
@@ -25,6 +26,7 @@ Having the following setup pulls in core and applies the patches:
         <script src="https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/on.patch.eve.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/ons.patch.eve.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/once.patch.eve.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/last.patch.eve.min.js"></script>
     </head>
 </html>
 ```
@@ -115,4 +117,19 @@ const handler1 = data => console.log(data);
 
 // this handler will only fire once and then unregister itself
 eve.once('my-event-name', handler1);
+```
+
+### last.patch.eve.js
+
+This patch allows to only invoke the most recent registered handler:
+
+```js
+const handler1 = data => console.log('handler1', data);
+const handler2 = data => console.log('handler2', data);
+
+eve.on('my-event-name', handler1);
+eve.on('my-event-name', handler2);
+
+// this will only trigger handler2
+eve.last('my-event-name', 'data'); // output: 'handler2 data'
 ```
