@@ -4,7 +4,7 @@ I stumbled upon [eev](https://github.com/chrisdavies/eev) which claims to be tin
 
 It is tiny and fast but not quite as tiny as it could be so I made something even more tiny.
 
-core.eve.js is all the fundemental API an event emitter needs and equally fast.
+core.eve.js is all the fundemental API an event emitter needs and even faster.
 
 ## How to get it.
 It is so simple and tiny the easiest way would be to just copy and paste the source and eventually modify it to your need.
