@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>benchmark</title>
+
+            <!-- mitt source -->
+            <script src="https://unpkg.com/mitt/dist/mitt.umd.js"></script>
+
+            <!-- eev source -->
+            <script src="https://cdn.jsdelivr.net/gh/chrisdavies/eev/eev.js"></script>
+
+            <!-- eve source -->
+            <script src="https://cdn.jsdelivr.net/gh/SilvanCodes/eve/core.eve.min.js"></script>
+
+            <script>
+                function benchmark(underTest, N = 100, M = 1e6) {
+                    let counter;
+
+                    // setup handler
+                    underTest.on('inc', i => counter += i);
+
+                    function measure() {
+                        counter = 0;
+                        const t1 = performance.now();
+                        while (counter < M) {
+                            // trigger event
+                            underTest.emit('inc', 1);
+                        }
+                        return performance.now() - t1;
+                    }
+
+                    let time = 0
+                    for (let i = 0; i < N; i++) {
+                        time += measure();
+                    }
+
+                    return `took ${ (time / N).toFixed(2) }ms average to process ${ M } events over ${ N } measurements.`;
+                }
+
+                function doBenchmark() {
+                    setTimeout(() => {
+                        document.write(`<p>${ ['<a href="https://github.com/developit/mitt">mitt</a>', benchmark(mitt())].join(' ') }</p>`);
+                        document.write(`<p>${ ['<a href="https://github.com/chrisdavies/eev">eev</a>', benchmark(new Eev())].join(' ') }</p>`);
+                        document.write(`<p>${ ['<a href="https://github.com/SilvanCodes/eve">eve</a>', benchmark(new Eve())].join(' ') }</p>`);
+                        document.close();
+                    });
+                }
+            </script>
+    </head>
+
+    <body onload="doBenchmark()">
+        <p>benchmarking...</p>
+    </body>
+</html>
