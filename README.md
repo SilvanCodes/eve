@@ -10,7 +10,7 @@ See benchmark [here](https://silvancodes.github.io/eve).
 ## How to get it.
 It is so simple and tiny the easiest way would be to just copy and paste the source and eventually modify it to your need.
 
-Another possibility is to use jsDelivr: https://cdn.jsdelivr.net/gh/SilvanCodes/eve/core.eve.min.js
+Another possibility is to use jsDelivr: https://cdn.jsdelivr.net/gh/SilvanCodes/eve/core.eve.js
 
 For the patches:
 - https://cdn.jsdelivr.net/gh/SilvanCodes/eve/patches/on.patch.eve.min.js
