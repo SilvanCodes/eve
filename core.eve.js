@@ -16,6 +16,6 @@ class Eve {
   }
   emit(event, ...data) {
     const fns = this.eventMap.get(event);
-    fns && fns.map(fn => fn(...data));
+    fns && fns.forEach(fn => fn(...data));
   }
 }
